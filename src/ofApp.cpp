@@ -677,38 +677,40 @@ void ofApp::audioOut(float * output, int bufferSize, int nChannels, int deviceID
 
 	for (int i = 0; i < bufferSize; i++) {
 		float pan = 0;
-		if (buf && !isnan(buf[j*2].y)) {
-			float val = max(min((buf[j * 2].y + buf[j * 2].z) / 20.f, 1.0f), -1.0f);		//buf is our gfx card buffer
-			pan = max(min(buf[j * 2].x, 5.0f), -5.0f);
-			bL = val * (1 - ((pan + 5.f) / 10));
-			bR = val * ((pan + 5.f) / 10);
-			if (grainplayer->grains.size() < nGrains) {
-				float speed = max(min(buf[(j * 2) + 1].w * abs(dt), 1.f), 0.001f);		//gets indiv particle speed from clr vector.w
-				float duration1 = min(max(eigenval4 * 0.01f, 0.001f), 0.35f);
-				float duration2 = min(max(eigenval3 * 0.5f, 0.001f), 0.35f);
-				if (playing) { //if playing perform a weighted random selection of sample from states, given their similarity ratings
-					auto state_it = states.begin();
-					float running_total = 0;
-					selected = false;
-					float rnd = rand() * (1.0f / RAND_MAX);	//random number from 0 to total-weight
-					while (!selected && state_it != states.end()) {
-						running_total += (*state_it)->similarity;
-						if (running_total >= rnd) {		
-							selectedSample = (*state_it)->audio_granSample;
-							selected = true;
+		if (buf) {
+			if (!isnan(buf[j * 2].y)) {			
+				float val = max(min((buf[j * 2].y + buf[j * 2].z) / 20.f, 1.0f), -1.0f);		//buf is our gfx card buffer
+				pan = max(min(buf[j * 2].x, 5.0f), -5.0f);
+				bL = val * (1 - ((pan + 5.f) / 10));
+				bR = val * ((pan + 5.f) / 10);
+				if (grainplayer->grains.size() < nGrains) {
+					float speed = max(min(buf[(j * 2) + 1].w * abs(dt), 1.f), 0.001f);		//gets indiv particle speed from clr vector.w
+					float duration1 = min(max(eigenval4 * 0.01f, 0.001f), 0.35f);
+					float duration2 = min(max(eigenval3 * 0.5f, 0.001f), 0.35f);
+					if (playing) { //if playing perform a weighted random selection of sample from states, given their similarity ratings
+						auto state_it = states.begin();
+						float running_total = 0;
+						selected = false;
+						float rnd = rand() * (1.0f / RAND_MAX);	//random number from 0 to total-weight
+						while (!selected && state_it != states.end()) {
+							running_total += (*state_it)->similarity;
+							if (running_total >= rnd) {		
+								selectedSample = (*state_it)->audio_granSample;
+								selected = true;
+							}
+							state_it++;
 						}
-						state_it++;
 					}
+					maxiStereoGrain<hannWinFunctor, maxiSample> *grain = new maxiStereoGrain<hannWinFunctor, maxiSample>(selectedSample, (val + 1) / 2, duration1, speed, pan, windowCache);
+					grainplayer->addGrain(grain);
 				}
-				maxiStereoGrain<hannWinFunctor, maxiSample> *grain = new maxiStereoGrain<hannWinFunctor, maxiSample>(selectedSample, (val + 1) / 2, duration1, speed, pan, windowCache);
-				grainplayer->addGrain(grain);
 			}
 		}
 
 		float p1 = (pan1 + 50) * 0.5;
 		float p2 = (pan2 + 50) * 0.5;
-		float o1 = osc1.sinewave((freq1 * (bL * noisefactor * 10 + 1)) + fmvals1[1] * fm1.sinewave(fmvals1[0])) * amp1;
-		float o2 = osc2.sinewave((freq2 * (bL * noisefactor * 10 + 1)) + fmvals2[1] * fm2.sinewave(fmvals2[0])) * amp2;
+		float o1 = osc1.sinewave((freq1 * (bL * noisefactor * 10 + 1)) + fmvals1[1] * fm1.sinewave(fmvals1[0])) * 0.25 * amp1;
+		float o2 = osc2.sinewave((freq2 * (bL * noisefactor * 10 + 1)) + fmvals2[1] * fm2.sinewave(fmvals2[0])) * 0.25 * amp2;
 
 		doublearray g1;
 		if (!grainplayer->grains.empty()) {
