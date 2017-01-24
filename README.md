@@ -1,10 +1,11 @@
-# SpringSynth
-Sonified Verlet Spring Simulation - using ofxMaxim and ofxImGui
+# AttractorSynth
+Sonification of a Chaotic attractor 
 
 ## Description:
-Contains custom PointMass and Link classes - each pointmass acts as a doubly linked list and is connected to one or two other pointmasses via a link. Each pointmass can be anchored or free, and has an oscillator, where frequency is determined by distance to the nearest anchor to the power of frequency ratio supplied by user. Similarly with FM frequency and Modulation index.
+Utilises Transform Feedback
 
 ## Install:
--Built with openframeworks of_v20161230_vs_nightly build, though any recent version will work.
+-Built with openframeworks of_v20161230_vs_nightly build **important** only the nightly build seems to support transform feedback, use this instead of the main branch.
 -Requires [ofxMaxim]( https://github.com/micknoise/Maximilian ) and [ofxImGui]( https://github.com/jvcleave/ofxImGui )  
--tested on Windows only, but should work on OSX.  
+-All other libraries are header only and are included.
+-tested on Windows VS 2015 only, this should work on OSX but only if the openframeworks transform feedback example in 'examples/gl' also works for your computer.  
