@@ -1,8 +1,9 @@
 # AttractorSynth
-Sonification of a Chaotic attractor 
+Sonification of a Chaotic attractor, using KNN and Eigendecomposition for shape recognition.
+
 
 ## Description:
-Utilises Transform Feedback
+This uses [Eigen 3.3.1]( http://eigen.tuxfamily.org/ ) for the Matrix processing, and [nanoflann]( https://github.com/jlblancoc/nanoflann ) for the light KNN implementation. Both are header-only libraries and have been included in /libs.
 
 ## Install:
 -Built with openframeworks of_v20161230_vs_nightly build **important** only the nightly build seems to support transform feedback, use this instead of the main branch.  
