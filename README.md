@@ -1,5 +1,5 @@
 # AttractorSynth
-Sonification of a Chaotic attractor, using KNN and Eigendecomposition for shape recognition.
+Realtime sonification of a Chaotic attractor, using KNN and Eigendecomposition for shape recognition, and maximilian for sound synthesis.
 
 ## Description:
 ### Transform Feedback  
