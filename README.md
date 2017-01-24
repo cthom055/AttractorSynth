@@ -13,7 +13,7 @@ State A contains sample tree.wav and has 0.1 similarity score.
 State B contains sample apple.wav and has 0.9 similarity score.
 When playing, the current state audio buffer will contain grains of apple 90% of the time, and tree the other 10%.
 
-The granulator's other parameters such as speed, position and duration are determined by iterating through the graphics card point buffer and creating a new grain based on each particles position and speed. This produces quite a convincing sonic effect that closely follows the visuals and shape.
+The granulator's other parameters such as speed, position and duration are determined by iterating through the graphics card point buffer and creating a new grain based on each particles position and speed. These particle values can also played directly with the 'noisefactor' parameter, adding a sheen of noise that follows the movement and point distribution. This produces quite a convincing sonic effect that closely follows the visuals and shape.
 
 ## Install:
 -Built with openframeworks of_v20161230_vs_nightly build **important** only the nightly build seems to support transform feedback, use this instead of the main branch.  
