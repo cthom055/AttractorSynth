@@ -16,8 +16,8 @@ When playing, the current state audio buffer will contain grains of apple 90% of
 The granulator's other parameters such as speed, position and duration are determined by iterating through the graphics card point buffer and creating a new grain based on each particles position and speed. These particle values can also played directly with the 'noisefactor' parameter, adding a sheen of noise that follows the movement and point distribution. This produces quite a convincing sonic effect that closely follows the visuals and shape.
 
 ## Install:
--Built with openframeworks of_v20161230_vs_nightly build **important** only the nightly build seems to support transform feedback, use this instead of the main branch.  
--Requires [ofxMaxim]( https://github.com/micknoise/Maximilian ) and [ofxImGui]( https://github.com/jvcleave/ofxImGui )  
--All other libraries are header only and are included.  
-- This uses [Eigen 3.3.1]( http://eigen.tuxfamily.org/ ) for the Matrix processing, and [nanoflann]( https://github.com/jlblancoc/nanoflann ) for the light KNN implementation. Both are header-only libraries and have been included in /lib.
--tested on Windows VS 2015 only, this should work on OSX but only if the openframeworks transform feedback example in 'examples/gl' also works for your computer.   
+- Built with openframeworks of_v20161230_vs_nightly build **important** only the nightly build seems to support transform feedback, use this instead of the main branch.  
+- Requires [ofxMaxim]( https://github.com/micknoise/Maximilian ) and [ofxImGui]( https://github.com/jvcleave/ofxImGui )  
+- All other libraries are header only and are included.  
+- This uses [Eigen 3.3.1]( http://eigen.tuxfamily.org/ ) for the Matrix processing, and [nanoflann]( https://github.com/jlblancoc/nanoflann ) for the light KNN implementation. Both are header-only libraries and have been included in /lib.  
+- tested on Windows VS 2015 only, this should work on OSX but only if the openframeworks transform feedback example in 'examples/gl' also works for your computer.   
